@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Blogify</title>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    
+    <div class="container mt-5">
+        <h1 class="text-3xl font-bold text-gray-900 mb-4" id="blog-title"><%= blog.title %></h1>
+        <img width="800px" src="<%= blog.coverImage %>" alt="Blog Image">
+        <pre style="font-weight: bold; font-size: medium;" class="bg-gray-200 p-4 rounded-lg overflow-x-auto whitespace-pre-wrap mt-4"><%= blog.body %></pre>
+    </div>
+    <div class="container">
+       - <img src="<%= blog.createdBy.profileImage %>" width="50px" alt="">  created by <span style="font-weight: 700;"><%= blog.createdBy.fullName %></span>
+    </div>
+
+    <div class="container mt-3">
+        <h3>Comments  (<%= comment.length %>)</h3>
+        <% if (locals.user) { %>
+            <div>
+                <form action="/comment/<%= blog._id %>" method="post">
+                  <div class="mb-3">
+                    <input type="text" class="form-control" name="content" placeholder="Enter your comment...">
+                    <button type="submit" class="btn btn-primary mt-1">Add</button>
+                  </div>  
+                </form>
+              </div>
+        <% } %>
+        <div class="container mt-3 mb-5">
+            <% comment.forEach(comment => { %>
+                <div class="container mb-1">
+                    <img src="<%= comment.createdBy.profileImage %>" width="40px" alt=""> <%= comment.createdBy.fullName %>
+                    <pre style="font-weight: bold; font-size: medium;" ><%= comment.content %></pre>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <%- include('./partials/scripts.ejs') %>
+</body>
+</html>

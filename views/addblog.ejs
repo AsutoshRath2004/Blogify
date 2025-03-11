@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Blogify</title>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+     <div class="container mt-5">
+        <form action="/addblog" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="coverImage" class="form-label">Cover Image</label>
+                <input class="form-control" type="file" id="coverImage" name="coverImage">
+              </div>
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" name="title" aria-describedby="title">
+            </div>
+            <div class="mb-3">
+                <label for="body">Body</label>
+                <textarea class="form-control" placeholder="Enter your content here..." name="body" id="body"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+     </div>
+    <%- include('./partials/scripts.ejs') %>
+</body>
+</html>
